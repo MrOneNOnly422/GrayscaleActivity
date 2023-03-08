@@ -46,6 +46,39 @@ namespace GrayscaleActivity
 
             pic.Save("C:\\Users\\QQ107\\Pictures\\Banner.jpg");
             }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Bitmap alt = new Bitmap("C:\\Users\\QQ107\\Pictures\\Banner.jpg");
+            
+            pictureBox1.Image = Image.FromFile("C:\\Users\\QQ107\\Pictures\\Banner.jpg");
+
+
+            Color sight;
+            int ret;
+
+            for (int iX = 0; iX < alt.Width; iX++)
+            {
+                for(int iY = 0; iY < alt.Height; iY++)
+                {
+                    sight = alt.GetPixel(iX, iY);
+                    ret = (int)(sight.R * 0.299 + sight.G * 0.578 + sight.B * 0.114);
+
+                    if (ret > 120)
+                    {
+                        ret = 255;
+                    }
+                    else
+                    {
+                        ret = 0;
+                    }
+                    alt.SetPixel(iX, iY, Color.FromArgb(ret, ret, ret));
+                }
+                pictureBox3.Image = alt;
+
+                alt.Save("C:\\Users\\QQ107\\Pictures\\Banner.jpg");
+            }
         }
+    }
     }
 
